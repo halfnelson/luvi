@@ -60,6 +60,7 @@ option(WithPCRE "Include " OFF)
 option(WithLPEG "Include " OFF)
 option(WithSharedPCRE "Shared or Static " OFF)
 option(WithZLIB "Include ZLIB" OFF)
+option(WithLuaSocket "Include LuaSocket" OFF)
 option(WithSharedZLIB "Shared or Static ZLIB" ON)
 option(WithPackageSH "Build shell-installable package." OFF)
 option(WithPackageTGZ "Build gziped tarball package." OFF)
@@ -119,6 +120,10 @@ if (WithZLIB)
   include(deps/zlib.cmake)
 endif (WithZLIB)
 
+if (WithLuaSocket)
+  include(deps/luasocket.cmake)
+endif (WithLuaSocket)
+
 add_definitions( -DLUVI_VERSION="${LUVI_VERSION}" )
 
 if(MSVC)
@@ -143,6 +148,7 @@ lua_add_executable(luvi
   src/lua/init.lua
   src/lua/luvipath.lua
   src/lua/luvibundle.lua
+  ${EXTRA_LUA}
 )
 
 if(APPLE)

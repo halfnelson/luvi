@@ -112,6 +112,15 @@ static lua_State* vm_acquire(){
   lua_setfield(L, -2, "zlib");
 #endif
 
+#ifdef WITH_LUASOCKET
+  // Store zlib module definition at preload.zlib
+  lua_pushcfunction(L, luaopen_socket_core);
+  lua_setfield(L, -2, "socket.core");
+  
+  lua_pushcfunction(L, luaopen_mime_core);
+  lua_setfield(L, -2, "mime.core");
+#endif
+
 #ifdef WITH_PLAIN_LUA
   {
       LUALIB_API int luaopen_init(lua_State *L);

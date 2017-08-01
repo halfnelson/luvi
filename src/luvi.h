@@ -50,6 +50,13 @@ LUALIB_API int luaopen_zlib(lua_State * const L);
 #ifdef WITH_LPEG
 int luaopen_lpeg(lua_State* L);
 #endif
+
+#ifdef WITH_LUASOCKET
+#include "luasocket.h"
+#include "mime.h"
+#endif
+
+
 #endif
 
 #if (LUA_VERSION_NUM >= 502)

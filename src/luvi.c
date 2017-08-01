@@ -41,6 +41,11 @@ LUALIB_API int luaopen_luvi(lua_State *L) {
   lua_pushstring(L, zlibVersion());
   lua_setfield(L, -2, "zlib");
 #endif
+#ifdef WITH_LUASOCKET
+  lua_pushstring(L, LUASOCKET_VERSION);
+  lua_setfield(L, -2, "socket");
+#endif
+  
 #ifdef WITH_WINSVC
   lua_pushstring(L, WINSVC_VERSION);
   lua_setfield(L, -2, "winsvc");

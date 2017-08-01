@@ -3,9 +3,7 @@
 set LUVI_PUBLISH_USER=luvit
 set LUVI_PUBLISH_REPO=luvi
 
-set GENERATOR=Visual Studio 12
-reg query HKEY_CLASSES_ROOT\VisualStudio.DTE.14.0 >nul 2>nul
-IF %errorlevel%==0 set GENERATOR=Visual Studio 14
+set GENERATOR=Visual Studio 15 2017
 set GENERATOR64=%GENERATOR% Win64
 
 for /f %%i in ('git describe') do set LUVI_TAG=%%i
@@ -15,7 +13,7 @@ GOTO :build
 
 :regular
 ECHO "Building regular64"
-cmake -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF -H. -Bbuild  -G"%GENERATOR64%"
+cmake -DWithOpenSSL=ON -DWithSharedOpenSSL=OFF -DWithPCRE=ON -DWithLPEG=ON -DWithSharedPCRE=OFF -DWithLuaSocket=ON -H. -Bbuild  -G"%GENERATOR64%"
 GOTO :end
 
 :regular-asm
